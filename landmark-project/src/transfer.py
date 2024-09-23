@@ -22,7 +22,6 @@ def get_model_transfer_learning(model_name="resnet18", n_classes=50):
     # HINT: loop over all parameters. If "param" is one parameter,
     # "param.requires_grad = False" freezes it
     for param in model_transfer.parameters():
-        # Freeze only parameters that are not already frozen
         if param.requires_grad:
             param.requires_grad = False
 
@@ -33,8 +32,6 @@ def get_model_transfer_learning(model_name="resnet18", n_classes=50):
     # 2. Create a new linear layer with the appropriate number of inputs and
     #    outputs
     model_transfer.fc  = nn.Linear(num_ftrs, n_classes)
-    for param in model.fc.parameters():
-        param.requires_grad = True
 
     return model_transfer
 
